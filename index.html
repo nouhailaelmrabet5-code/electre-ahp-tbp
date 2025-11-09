@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Méthode ELECTRE - Tableau de Bord Prospectif</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo">📊</div>
+      <div class="title">
+        <h1>Méthode ELECTRE - Tableau de Bord Prospectif</h1>
+        <p>Évaluation multicritère de la performance industrielle</p>
+      </div>
+      <div class="award">🏅</div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="tabs">
+    <button id="tab-saisie" class="tab active" onclick="switchTab('saisie')">📋 Saisie des Données</button>
+    <button id="tab-resultats" class="tab" onclick="switchTab('resultats')">📈 Résultats ELECTRE</button>
+    <button id="tab-dashboard" class="tab" onclick="switchTab('dashboard')">👁️ Dashboard Electre</button>
+    <button id="tab-ahp-resultats" class="tab" onclick="switchTab('ahp-resultats')">🧮 Résultats AHP</button>
+    <button id="tab-ahp-dashboard" class="tab" onclick="switchTab('ahp-dashboard')">📈 Dashboard AHP</button>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main>
+    <!-- Onglet Saisie des Données -->
+    <section id="saisie-section" class="content-section active">
+      <div class="card">
+        <h2>🎯 Situations Réelles</h2>
+        <button class="btn-add" onclick="addRealRow()">+ Ajouter</button>
+        <table id="real-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Client (c_C)</th>
+              <th>Processus (c_PI)</th>
+              <th>Apprentissage (c_AO)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" value="tr1_08" /></td>
+              <td><input type="number" step="0.01" value="0.32" /></td>
+              <td><input type="number" step="0.01" value="0.17" /></td>
+              <td><input type="number" step="0.01" value="0.43" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="tr2_08" /></td>
+              <td><input type="number" step="0.01" value="0.3" /></td>
+              <td><input type="number" step="0.01" value="0.24" /></td>
+              <td><input type="number" step="0.01" value="0.45" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="tr3_08" /></td>
+              <td><input type="number" step="0.01" value="0.45" /></td>
+              <td><input type="number" step="0.01" value="0.33" /></td>
+              <td><input type="number" step="0.01" value="0.56" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+             <tr>
+              <td><input type="text" value="tr4_08" /></td>
+              <td><input type="number" step="0.01" value="0.54" /></td>
+              <td><input type="number" step="0.01" value="0.49" /></td>
+              <td><input type="number" step="0.01" value="0.67" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="tr1_09" /></td>
+              <td><input type="number" step="0.01" value="0.65" /></td>
+              <td><input type="number" step="0.01" value="0.61" /></td>
+              <td><input type="number" step="0.01" value="0.72" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>⭐ Situations Espérées</h2>
+        <button class="btn-add" onclick="addExpectedRow()">+ Ajouter</button>
+        <table id="expected-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Client (c_C)</th>
+              <th>Processus (c_PI)</th>
+              <th>Apprentissage (c_AO)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" value="tr2*_08" /></td>
+              <td><input type="number" step="0.01" value="0.4" /></td>
+              <td><input type="number" step="0.01" value="0.25" /></td>
+              <td><input type="number" step="0.01" value="0.55" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="tr3*_08" /></td>
+              <td><input type="number" step="0.01" value="0.5" /></td>
+              <td><input type="number" step="0.01" value="0.4" /></td>
+              <td><input type="number" step="0.01" value="0.65" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="tr4*_08" /></td>
+              <td><input type="number" step="0.01" value="0.6" /></td>
+              <td><input type="number" step="0.01" value="0.6" /></td>
+              <td><input type="number" step="0.01" value="0.8" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="tr1*_09" /></td>
+              <td><input type="number" step="0.01" value="0.7" /></td>
+              <td><input type="number" step="0.01" value="0.8" /></td>
+              <td><input type="number" step="0.01" value="0.9" /></td>
+              <td><button class="btn-delete" onclick="deleteRow(this)">✖</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>⚙️ Seuils de Préférence</h2>
+        <div class="preference-grid">
+          <div>
+            <label>q Client (indifférence)</label>
+            <input type="number" id="qC" step="0.01" value="0.03" />
+          </div>
+          <div>
+            <label>p Client (préférence stricte)</label>
+            <input type="number" id="pC" step="0.01" value="0.05" />
+          </div>
+          <div>
+            <label>q Processus</label>
+            <input type="number" id="qPI" step="0.01" value="0.02" />
+          </div>
+          <div>
+            <label>p Processus</label>
+            <input type="number" id="pPI" step="0.01" value="0.06" />
+          </div>
+          <div>
+            <label>q Apprentissage</label>
+            <input type="number" id="qAO" step="0.01" value="0.05" />
+          </div>
+          <div>
+            <label>p Apprentissage</label>
+            <input type="number" id="pAO" step="0.01" value="0.12" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🔢 Paramètres ELECTRE</h2>
+        <div class="params-grid">
+          <div>
+            <label>Seuil Concordance (C)</label>
+            <input type="number" id="C" step="0.01" value="0.75" />
+          </div>
+          <div>
+            <label>Seuil Discordance (D)</label>
+            <input type="number" id="D" step="0.01" value="0.1" />
+          </div>
+          <div>
+            <label>Poids Client (w)</label>
+            <input type="number" id="wC" step="1" value="3" />
+          </div>
+          <div>
+            <label>Poids Processus</label>
+            <input type="number" id="wPI" step="1" value="3" />
+          </div>
+          <div>
+            <label>Poids Apprentissage</label>
+            <input type="number" id="wAO" step="1" value="1" />
+          </div>
+          <div>
+            <label>m_idéale</label>
+            <input type="number" id="mIdeal" step="0.1" value="1" />
+          </div>
+          <div>
+            <label>m_anti_idéale</label>
+            <input type="number" id="mAntiIdeal" step="0.1" value="0" />
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" onclick="runElectre()">🚀 Calculer ELECTRE</button>
+      </div>
+    </section>
+
+    <!-- Onglet Résultats ELECTRE -->
+    <section id="resultats-section" class="content-section">
+      <div class="card">
+        <h2>📊 Classement des Situations Réelles</h2>
+        <div id="real-rank-table"></div>
+      </div>
+
+
+      <div class="card">
+        <h2>📋 Proposition d’aménagement pour le TBP</h2>
+        <div id="tbp-amendment"></div>
+      </div>
+    </section>
+
+    <!-- Onglet Résultats AHP -->
+    <section id="ahp-resultats-section" class="content-section">
+      <div class="card">
+        <h2>🧮 Classement AHP (Score Global)</h2>
+        <div id="ahp-rank-table"></div>
+      </div>
+    </section>
+
+    <!-- Onglet Dashboard -->
+    <section id="dashboard-section" class="content-section">
+      <div class="card">
+        <h2>📈 Évolution des Performances-ELECTRE</h2>
+        <canvas id="evolution-chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>🏆 Classement des Situations-ELECTRE</h2>
+        <canvas id="rank-bar-chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>🌐 Vue Radar - Comparaison Multicritère-ELECTRE</h2>
+        <canvas id="radar-chart"></canvas>
+      </div>
+
+      <div class="card analysis-card">
+        <h2>💡 Analyse et Recommandations</h2>
+        <div id="analysis-recommendations">
+          <p><strong>Meilleure situation :</strong> tr3_08 (Rang 2)</p>
+          <p><strong>Tendance générale :</strong> 📈 Amélioration progressive observée</p>
+          <p><strong>Action recommandée :</strong> ⚠️ Revoir la stratégie - écart avec les objectifs espérés</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Onglet Dashboard AHP -->
+    <section id="ahp-dashboard-section" class="content-section">
+      <div class="card">
+        <h2>📊 Score Global AHP par Trimestre</h2>
+        <canvas id="ahp-score-chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>🏆 Classement AHP (Rang)</h2>
+        <canvas id="ahp-rank-bar-chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>🌐 Vue Radar - Comparaison Multicritère AHP</h2>
+        <canvas id="ahp-radar-chart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
